@@ -75,6 +75,9 @@ async def adding(client, message):
 						alreaddy += 1
 					except UserPrivacyRestricted:
 						privacyy += 1
+					except FloodWait as e:
+						await message.reply_text(f"Telegram Gave You Flood Of {e.value} seconds! Paused for {e.value} seconds!")
+						await asyncio.sleep(int(e.value))
 					except:
 						cancledd += 1
 			except FloodWait as lol:
