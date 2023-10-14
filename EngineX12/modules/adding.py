@@ -1,5 +1,6 @@
 # All Credit Goes To Ayush!
 import time
+import csv
 import asyncio
 from EngineX12 import app
 from pyrogram import filters
@@ -16,61 +17,56 @@ freeze_time = 0
 
 @app.on_message(filters.command("add") & filters.user(OWNER_ID))
 async def adding(client, message):
-	nrop = await message.reply_text("🔄 Loading Proc")
+	nrop = await message.reply_text("🔄 Loading Task...")
 	if len(message.command) < 2:
-		return await nrop.edit_text("Please Tell Which members you wanna add here!\n\nEx. -> /add offline/online\n\noffline means those who are offline (<b>HIGH Recommended for growing group</b>).\nonline means those members who are active on telegram.")
-	try:
-		choic = message.text.split(" ", maxsplit=1)[1]
-	except IndexError:
-		return await message.reply_text("LoL! Tell me type of members. offline/online too!")
+		await nrop.edit_text("Adding Offline Members Becouse You Didn't Told me...")
 	nropp = await nrop.edit_text(f"🤖 Scaning Members...")
 	# Started Driver Code
 	if len(temploaded)==0:
 		await message.reply_text(f"<b>⚠️ WARNING:</b>\nYou Didn't scrapped members from your members target group! next time, scrape members via /scrape <Group Username/ID>\n\nSearching For backup log...")
 		try:
-			with open(f'{filenm}.txt','r') as f:
-				string = f.readlines()
-				IDsOfMem = list(string[0].split(" "))
-				for i in IDsOfMem:
-					temploaded.append(i)
-				await nropp.edit_text(f"Members Loaded From Your Scraped File ❇️!\nNow Starting Adding Members...")
+			file = open(f'{filenm}.csv','r')
+			a = file.readlines()
+			b = " ".join(a)
+			c = b.split()
+			for i in c:
+				if i.isdigit():
+					from_file.append(int(i))
+			await nropp.edit_text(f"{len(from_file)} Members Loaded From Your Scraped File ❇️!\nNow Starting Adding Members...")
 		except FileNotFoundError:
 			await nrop.edit_text(f"♻️ You Have No File Of Own Scrapped Group!\n\nTrying To Add from Ayush's File!")
-			with open('ayush.txt','r') as god:
-				string = god.readlines()
-				IDsOfMem = list(string[0].split(" "))
-				for i in IDsOfMem:
-					from_file.append(i)
-				await message.reply_text(f"Members Loaded From Ayush's File ✅!\n\n(Not Recommended Everytime Using My File!)")
+			file = open(f'premium.csv','r')
+			a = file.readlines()
+			b = " ".join(a)
+			c = b.split()
+			for i in c:
+				if i.isdigit():
+					from_file.append(int(i))
+			await message.reply_text(f"{from_file} Members Loaded From Ayush's File ✅!\n\n(Not Recommended Everytime Using My File!)")
 	# End Of Driver Code
-	if len(temploaded)==0:
+	if len(from_file) < 50:
+		print(from_file)
+	if len(temploaded) > 0:
 		domtor = temploaded
 	else:
 		domtor = from_file
-	grained_members = []
-	for ina in domtor:
-		if ina.isdigit():
-			converted_int = int(ina)
-			grained_members.append(converted_int)
-		else:
-			return await message.reply_text("WTH! You Gave Me A Currupted File Or Fucked The File Code!\n\nClone again and do not change or modify the repo If you are a noob!")
-
-	finallyw = await message.reply_text(f"✅ All Scanning and loading has been done! Now Adding Members According To Your Choice...")
+	finallyw = await message.reply_text(f"{len(domtor)} Members Loaded! ✅\nNow Adding Members According To Your Choice...")
 
 	addedd = 0
 	cancledd = 0
 	privacyy = 0
 	alreaddy = 0
-	if "online" in message.:
+	if "online" in message.text:
 		member_type = ["userstatus.recently", "userstatus.online"]
 	else:
 		member_type = ["userstatus.long_ago", "userstatus.last_month", "userstatus.last_week"]
 	try:
-		for membar in grained_members:
+		for membar in domtor:
 			try:
-				if (str(membar.user.status)).lower() in member_type:
+				user = await app.get_users(membar)
+				if (str(user.status)).lower() in member_type:
 					try:
-						await app.add_chat_members(message.chat.id, membar)
+						await app.add_chat_members(message.chat.id, user.id)
 						addedd += 1
 						print("Member Added!-----------✅")
 						if freeze_time > 1:
@@ -91,6 +87,7 @@ async def adding(client, message):
 
 @app.on_message(filters.command("delay") & filters.user(OWNER_ID))
 async def settimer(client, message):
+	global freeze_time
 	try:
 		timee = message.text.split(" ", maxsplit=1)[1]
 	except IndexError:

@@ -5,6 +5,7 @@ from pyrogram import filters
 from pyrogram.errors import FloodWait
 from pyrogram.enums import UserStatus
 from config import OWNER_ID
+import csv
 
 filenm = "Scraped"
 members = []
@@ -21,16 +22,16 @@ async def scrapingg(client, message):
 	await nrop.edit_text(f"<b>🔄 ••• SCRAPING ••• 🔄")
 	try:
 		async for member in app.get_chat_members(group_username):
-			members.append(membar.user.id)
+			members.append(member.user.id)
 		await nrop.edit_text(f"<b>✅ •• PACKING •• ✅")
-		ayu = open(f"{filenm}.txt","a")
+		file = open(f'{filenm}.csv','w')
 		for dongrila in members:
-			ayu.write(" " + str(dongrila) + " ")
-		ayu.close()
+			file.write(f"{str(dongrila)} ")
+		file.close()
 		return await nrop.edit_text(f"<b>✅ • SCRAPED • ✅")
 
 	except Exception as exc:
-		await nrop.edit_text(f"<b>❌ • ERROR • ❌")
+		await nrop.edit_text(f"<b>❌ • ERROR • ❌\n\n<code>{exc}</code>")
 
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
