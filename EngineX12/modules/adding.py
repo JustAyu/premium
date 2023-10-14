@@ -77,12 +77,12 @@ async def adding(client, message):
 						privacyy += 1
 					except FloodWait as e:
 						await message.reply_text(f"Telegram Gave You Flood Of {e.value} seconds! Paused for {e.value} seconds!")
-						await asyncio.sleep(int(e.value))
+						time.sleep(int(e.value))
 					except:
 						cancledd += 1
 			except FloodWait as lol:
 				print(f"WARNING :- \n\nFLOOD WAIT FOR {lol.value}]\n\nTelegram Give You FloodWait! It's not script's issue, It's Telegram Issue!")
-				await asyncio.sleep(int(lol.value))
+				time.sleep(int(lol.value))
 		await message.reply_text(f"<b>TASK COMPLETED! ✅</b>\n<code>---------------</code>\n<b>REPORT</b>:\n<b>Members Loaded</b> : <code>{len(domtor)}</code>\n<b>Added</b> : <code>{addedd}</code>\n<b>Cancelled By Privacy</b> : <code>{privacyy}</code>\n<b>Skipped</b> : <code>{cancledd}</code>\n<b>Already Members</b> : <code>{alreaddy}</code>")
 	except:
 		await message.reply_text(f"<b>TASK FAILED! ⚠️</b>\n<code>---------------</code>\n<b>REPORT</b>:\n<b>Members Loaded</b> : <code>{len(domtor)}</code>\n<b>Added</b> : <code>{addedd}</code>\n<b>Cancelled By Privacy</b> : <code>{privacyy}</code>\n<b>Skipped</b> : <code>{cancledd}</code>\n<b>Already Members</b> : <code>{alreaddy}</code>\n\nPlease Clone Repo again or check your telegram account!")
