@@ -19,6 +19,10 @@ async def adding(client, message):
 	nrop = await message.reply_text("🔄 Loading Proc")
 	if len(message.command) < 2:
 		return await nrop.edit_text("Please Tell Which members you wanna add here!\n\nEx. -> /add offline/online\n\noffline means those who are offline (<b>HIGH Recommended for growing group</b>).\nonline means those members who are active on telegram.")
+	try:
+		choic = message.text.split(" ", maxsplit=1)[1]
+	except IndexError:
+		return await message.reply_text("LoL! Tell me type of members. offline/online too!")
 	nropp = await nrop.edit_text(f"🤖 Scaning Members...")
 	# Started Driver Code
 	if len(temploaded)==0:
@@ -57,7 +61,7 @@ async def adding(client, message):
 	cancledd = 0
 	privacyy = 0
 	alreaddy = 0
-	if "online" in message:
+	if "online" in message.:
 		member_type = ["userstatus.recently", "userstatus.online"]
 	else:
 		member_type = ["userstatus.long_ago", "userstatus.last_month", "userstatus.last_week"]
@@ -66,7 +70,7 @@ async def adding(client, message):
 			try:
 				if (str(membar.user.status)).lower() in member_type:
 					try:
-						await app.add_chat_members(message.chat.id, membar.user.id)
+						await app.add_chat_members(message.chat.id, membar)
 						addedd += 1
 						print("Member Added!-----------✅")
 						if freeze_time > 1:
@@ -109,7 +113,7 @@ async def loads(client, message):
 	replyreport = await message.reply_text(f"🔄**Members loading from {group_username}...**")
 	try:
 		async for member in app.get_chat_members(group_username):
-			temploaded.append(member)
+			temploaded.append(member.user.id)
 		replreport = await message.reply_text(f"🔄<b>{len(temploaded)} Members loaded from {group_username}!</b>")
 	except Exception as exc:
 		eplyreport = await message.reply_text(f"<b>ERROR</b>:\n\n{exc}")

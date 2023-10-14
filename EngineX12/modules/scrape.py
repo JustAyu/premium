@@ -21,7 +21,7 @@ async def scrapingg(client, message):
 	await nrop.edit_text(f"<b>🔄 ••• SCRAPING ••• 🔄")
 	try:
 		async for member in app.get_chat_members(group_username):
-			members.append(member)
+			members.append(membar.user.id)
 		await nrop.edit_text(f"<b>✅ •• PACKING •• ✅")
 		ayu = open(f"{filenm}.txt","a")
 		for dongrila in members:
