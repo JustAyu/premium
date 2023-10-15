@@ -12,4 +12,4 @@
 <h1>--------------------------------------------</h1>
 Script's Is Tested many times! So Script Is Safe To Use. 
 <div></div>
-<b>SCRIPT</b> : Passed ✅
+<b>SCRIPT Test</b> : Passed ✅
