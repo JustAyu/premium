@@ -5,8 +5,9 @@
 <p>Hello Dear, I have no time for writing a beautifull readme. SO IN SHORT : This script is a local hosting based and you can login this script same as you login in your phone!</p>
 <h1>--------------------------------------------</h1>
 <div>
-  <h6>GUIDE:</h6>
+  <h4>GUIDE:</h4>
   <code>git clone https://github.com/justayu/premium && cd premium</code>
   <p>Copy and paste into your TERMUX or VPS. Then type <code>bash setup</code> ...This will install all needed things (Some Internet Will Be Used for first time in updating and upgrade)</p>
 </div>
+<h1>--------------------------------------------</h1>
 Passed -✅
