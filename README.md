@@ -7,5 +7,6 @@
 <div>
   <h6>GUIDE:</h6>
   <code>git clone https://github.com/justayu/premium && cd premium</code>
+  <p>Copy and paste into your TERMUX or VPS. Then type <code>bash setup</code> ...This will install all needed things (Some Internet Will Be Used for first time in updating and upgrade)</p>
 </div>
 Passed -✅
