@@ -10,4 +10,6 @@
   <p>Copy and paste into your TERMUX or VPS. Then type <code>bash setup</code> ...This will install all needed things (Some Internet Will Be Used for first time in updating and upgrade)</p>
 </div>
 <h1>--------------------------------------------</h1>
-Passed -✅
+Script's Is Tested many times! So Script Is Safe To Use. 
+
+<b>SCRIPT</b> : Passed ✅
