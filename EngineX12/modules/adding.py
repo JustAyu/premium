@@ -71,9 +71,9 @@ async def adding(client, message):
 						print("Member Added!-----------✅")
 						if freeze_time > 1:
 							time.sleep(freeze_time)
-					except UserAlreadyParticipant:
+					except UserAlreadyParticipant as b:
 						alreaddy += 1
-					except UserPrivacyRestricted:
+					except UserPrivacyRestricted as r:
 						privacyy += 1
 					except FloodWait as e:
 						await message.reply_text(f"Telegram Gave You Flood Of {e.value} seconds! Paused for {e.value} seconds!")
@@ -83,9 +83,9 @@ async def adding(client, message):
 			except FloodWait as lol:
 				print(f"WARNING :- \n\nFLOOD WAIT FOR {lol.value}]\n\nTelegram Give You FloodWait! It's not script's issue, It's Telegram Issue!")
 				time.sleep(int(lol.value))
-		await message.reply_text(f"<b>TASK COMPLETED! ✅</b>\n<code>---------------</code>")
-	except:
-		await message.reply_text(f"<b>TASK FAILED! ⚠️</b>\n<code>---------------</code>\n<b>REPORT</b>:\n<b>Members Loaded</b> : <code>{len(domtor)}</code>\n<b>Added</b> : <code>{addedd}</code>\n<b>Cancelled By Privacy</b> : <code>{privacyy}</code>\n<b>Skipped</b> : <code>{cancledd}</code>\n<b>Already Members</b> : <code>{alreaddy}</code>\n\nPlease Clone Repo again or check your telegram account!")
+		await message.reply_text(f"<b>TASK COMPLETED! ✅</b>\n<code>---------------</code>Total Added >> {addedd}")
+	except Exception as ebc:
+		await message.reply_text(f"<b>TASK FAILED! ⚠️\n\nERROR: {ebc}")
 
 
 @app.on_message(filters.command("delay") & filters.user(OWNER_ID))
@@ -96,8 +96,8 @@ async def settimer(client, message):
 	except IndexError:
 		return await message.reply_text("Error BSDK!")
 	if timee.isdigit:
-		freeze_time += timee
-		await message.reply_text(f"Your Script Have Been Set To {freeze_time}! ✅\n\nScript will stop after every member added. It's Normal!!")
+		freeze_time += int(timee)
+		await message.reply_text(f"Delay Set To {freeze_time}! ✅\n\nScript will stop after every single member added. It's Normal!!")
 	else:
 		await message.reply_text(f"GIVE FREEZE TIME IN SECONDS! Ex. /delay 5")
 
